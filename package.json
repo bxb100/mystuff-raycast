@@ -44,11 +44,39 @@
       "icon": "headsets.png",
       "description": "Handy headset control cli tools",
       "mode": "view"
+    },
+    {
+      "name": "search-image-with-google-lens",
+      "title": "Search Image with Google Lens",
+      "description": "Search Image with Google Lens by taking a screenshot or selecting an image in Finder",
+      "mode": "no-view",
+      "icon": "lens-icon.png",
+      "preferences": [
+        {
+          "name": "apiBaseUrl",
+          "type": "textfield",
+          "required": false,
+          "title": "Base URL",
+          "default": "https://google-lens.yencheng.dev",
+          "description": "The base URL for the API that handles image upload and preview."
+        },
+        {
+          "name": "turnOffUploadAlert",
+          "label": "Turn off upload alert",
+          "type": "checkbox",
+          "required": false,
+          "title": "Upload Image Alert",
+          "description": "Turn off the upload alert when uploading an image to Google Lens",
+          "default": false
+        }
+      ]
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.104.11",
-    "@raycast/utils": "^1.17.0"
+    "@raycast/api": "^1.104.13",
+    "@raycast/utils": "^1.17.0",
+    "form-data": "^4.0.5",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
