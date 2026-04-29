@@ -1,0 +1,11 @@
+name = "google-lens-r2"
+main = "google-lens-r2-worker.ts"
+compatibility_date = "2026-04-01"
+
+[[r2_buckets]]
+binding = "GOOGLE_LENS_IMAGES"
+bucket_name = "google-lens-images"
+
+[vars]
+PUBLIC_BASE_URL = "https://google-lens.example.com"
+MAX_UPLOAD_BYTES = "10485760"

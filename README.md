@@ -16,9 +16,9 @@ A collection of my custom Raycast extensions for fun.
 <https://makdulac.com/daxduckdex.html>
 
 <p align="center">
-<img src="metadata/dex-0.png">
-</p>
-
-<p align="center">
 <img src="metadata/dex-1.png">
 </p>
+
+### Google Lens
+
+Fork from https://www.raycast.com/ridemountainpig/google-lens
