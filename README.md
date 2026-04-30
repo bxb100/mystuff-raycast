@@ -1,6 +1,6 @@
 # MyStuff Raycast Extensions
 
-> [!WARNING]   
+> [!WARNING]  
 > This is project vibe coding by gpt-5.4
 
 A collection of my custom Raycast extensions for fun.

@@ -80,7 +80,7 @@ export default async () => {
         title: "No image selected, please take a screenshot...",
       });
       setTimeout(() => {
-        toast.hide();
+        void toast.hide();
       }, 1500);
       await closeMainWindow();
 
@@ -144,7 +144,7 @@ export default async () => {
       throw new Error("Search failed");
     }
   } catch (error) {
-    showFailureToast(error, { title: usedScreenshot ? "Screenshot search failed" : "Image search failed" });
+    void showFailureToast(error, { title: usedScreenshot ? "Screenshot search failed" : "Image search failed" });
   } finally {
     // Delete temp screenshot if created
     if (tempScreenshot && filePath && existsSync(filePath)) {

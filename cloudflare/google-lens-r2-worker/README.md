@@ -6,13 +6,9 @@ Remember to change CORS and Delete Rules in the R2 setting
 
 ```json
 [
-  {
-    "AllowedOrigins": [
-      "https://google.com"
-    ],
-    "AllowedMethods": [
-      "GET"
-    ]
-  }
+    {
+        "AllowedOrigins": ["https://google.com"],
+        "AllowedMethods": ["GET"]
+    }
 ]
 ```
