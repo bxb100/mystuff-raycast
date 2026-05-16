@@ -166,7 +166,10 @@ function CharacterBrowser({
         sortedCharacters.map((character) => (
           <Grid.Item
             key={character.id}
-            content={{ value: { source: character.url }, tooltip: character.name }}
+            content={{
+              value: { source: character.url },
+              tooltip: character.name,
+            }}
             title={character.name}
             subtitle={`${character.discoverer} · ${character.discovered_date}`}
             keywords={[character.discoverer, character.discovered_date, ...character.tags]}
@@ -282,10 +285,16 @@ function updateSortOrder(newValue: string, setSortOrder: (value: SortOrder) => v
 
 function compareCharacters(left: Character, right: Character, sortOrder: SortOrder) {
   if (sortOrder === "asc") {
-    return left.name.localeCompare(right.name, undefined, { numeric: true, sensitivity: "base" });
+    return left.name.localeCompare(right.name, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
   }
 
-  return right.name.localeCompare(left.name, undefined, { numeric: true, sensitivity: "base" });
+  return right.name.localeCompare(left.name, undefined, {
+    numeric: true,
+    sensitivity: "base",
+  });
 }
 
 function buildFileName(name: string, url: string) {

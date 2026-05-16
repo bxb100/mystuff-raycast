@@ -9,7 +9,10 @@ export const brewPath = cpus()[0].model.includes("Apple")
   ? "/opt/homebrew/bin/headsetcontrol"
   : "/usr/local/bin/headsetcontrol";
 
-export function getBatteryIcon(device: Device): { source: Icon; tintColor: Color } {
+export function getBatteryIcon(device: Device): {
+  source: Icon;
+  tintColor: Color;
+} {
   const level = device.battery.level;
   const tintColor = level > 20 ? Color.Green : level > 10 ? Color.Orange : Color.Red;
 

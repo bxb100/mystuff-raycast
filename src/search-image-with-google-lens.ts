@@ -144,7 +144,9 @@ export default async () => {
       throw new Error("Search failed");
     }
   } catch (error) {
-    void showFailureToast(error, { title: usedScreenshot ? "Screenshot search failed" : "Image search failed" });
+    void showFailureToast(error, {
+      title: usedScreenshot ? "Screenshot search failed" : "Image search failed",
+    });
   } finally {
     // Delete temp screenshot if created
     if (tempScreenshot && filePath && existsSync(filePath)) {
