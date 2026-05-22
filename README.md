@@ -22,3 +22,7 @@ A collection of my custom Raycast extensions for fun.
 ### Google Lens
 
 Fork from https://www.raycast.com/ridemountainpig/google-lens
+
+### GitHub Stars DB9 Search
+
+<https://db9.ai/docs/guides/rag-with-built-in-embeddings/>
