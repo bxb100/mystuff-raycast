@@ -1,4 +1,4 @@
-import { defineConfig } from "vite-plus";
+import { defineConfig, loadEnv } from "vite-plus";
 
 export default defineConfig({
   staged: {
@@ -135,5 +135,8 @@ export default defineConfig({
     singleQuote: false,
     sortPackageJson: false,
     ignorePatterns: [],
+  },
+  test: {
+    env: loadEnv("", process.cwd(), ""),
   },
 });

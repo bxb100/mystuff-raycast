@@ -16,6 +16,7 @@
     "@raycast/api": "^1.104.13",
     "@raycast/utils": "^2.2.4",
     "form-data": "^4.0.5",
+    "get-db9": "^0.6.1",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
@@ -117,6 +118,36 @@
           "type": "textfield"
         }
       ]
+    },
+    {
+      "name": "search-github-stars",
+      "title": "Search GitHub Stars",
+      "icon": "github.png",
+      "description": "Semantic search over synced GitHub starred repositories in DB9",
+      "mode": "view"
+    },
+    {
+      "name": "sync-github-stars-to-db9",
+      "title": "Sync GitHub Stars to DB9",
+      "icon": "github_sync.png",
+      "description": "Manually sync GitHub starred repositories into DB9 for hybrid retrieval",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "db9-client-token",
+      "type": "password",
+      "required": true,
+      "title": "DB9 Client Token",
+      "description": "DB9 bearer token. It is only sent to https://api.db9.ai."
+    },
+    {
+      "name": "github-token",
+      "type": "password",
+      "required": true,
+      "title": "GitHub Token",
+      "description": "GitHub token with permission to read starred repositories."
     }
   ],
   "platforms": [

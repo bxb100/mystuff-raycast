@@ -12,5 +12,6 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "resolveJsonModule": true
-  }
+  },
+  "references": [{ "path": "./tsconfig.test.json" }]
 }
