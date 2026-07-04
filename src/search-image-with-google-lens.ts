@@ -16,15 +16,15 @@ import { tmpdir, platform } from "os";
 import { join } from "path";
 import { existsSync } from "fs";
 import { readFile, unlink } from "fs/promises";
-import FormData from "form-data";
-import fetch from "node-fetch";
 import { UPLOAD_ENDPOINT, ACCEPTED_TYPES } from "./google-lens/constants";
 import { UploadResponse } from "./google-lens/types";
+import fetch from "node-fetch";
 
 const exec = promisify(execCb);
 
 export default async () => {
-  const { turnOffUploadAlert, apiBaseUrl } = getPreferenceValues<PreferenceValues>();
+  const { turnOffUploadAlert, apiBaseUrl } =
+    getPreferenceValues<PreferenceValues>();
   const isWindows = platform() === "win32";
 
   let usedScreenshot = false;
@@ -107,7 +107,9 @@ export default async () => {
 
     await showToast({
       style: Toast.Style.Animated,
-      title: usedScreenshot ? "Uploading screenshot to Google Lens..." : "Uploading image to Google Lens...",
+      title: usedScreenshot
+        ? "Uploading screenshot to Google Lens..."
+        : "Uploading image to Google Lens...",
     });
 
     if (!existsSync(filePath)) {
@@ -117,15 +119,15 @@ export default async () => {
     const buffer = await readFile(filePath);
     const form = new FormData();
     const separator = platform() === "win32" ? "\\" : "/";
-    form.append("image", buffer, {
-      filename: filePath.split(separator).pop(),
-      contentType: `image/${fileExtension}`,
-    });
+    form.append(
+      "image",
+      new Blob([buffer], { type: `image/${fileExtension}` }),
+      filePath.split(separator).pop(),
+    );
 
     const res = await fetch(`${apiBaseUrl}/${UPLOAD_ENDPOINT}`, {
       method: "POST",
       body: form,
-      headers: form.getHeaders(),
     });
 
     if (res.ok) {
@@ -136,7 +138,9 @@ export default async () => {
           style: Toast.Style.Success,
           title: "Opening Google Lens...",
         });
-        await open(`https://lens.google.com/uploadbyurl?url=${encodeURIComponent(imageUrl)}`);
+        await open(
+          `https://lens.google.com/uploadbyurl?url=${encodeURIComponent(imageUrl)}`,
+        );
       } else {
         throw new Error("Search failed");
       }
@@ -145,7 +149,9 @@ export default async () => {
     }
   } catch (error) {
     void showFailureToast(error, {
-      title: usedScreenshot ? "Screenshot search failed" : "Image search failed",
+      title: usedScreenshot
+        ? "Screenshot search failed"
+        : "Image search failed",
     });
   } finally {
     // Delete temp screenshot if created

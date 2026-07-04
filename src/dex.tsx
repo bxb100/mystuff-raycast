@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Action, ActionPanel, getPreferenceValues, Grid, List, showInFinder, showToast, Toast } from "@raycast/api";
+import {
+  Action,
+  ActionPanel,
+  getPreferenceValues,
+  Grid,
+  List,
+  showInFinder,
+  showToast,
+  Toast,
+} from "@raycast/api";
 import { access, mkdir, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { basename, extname, join } from "node:path";
@@ -42,21 +51,22 @@ export default function Command() {
   const [errorMessage, setErrorMessage] = useState<string>();
   const preferences = getPreferenceValues<CommandPreferences>();
 
-  const { isLoading, data } = useFetch<CharactersApiResponse, Character[], Character[]>(
-    `https://api.makdulac.com/api/characters`,
-    {
-      mapResult(result: CharactersApiResponse) {
-        return {
-          data: result.characters,
-        };
-      },
-      keepPreviousData: true,
-      initialData: [],
-      onError(error) {
-        setErrorMessage(error.message);
-      },
+  const { isLoading, data } = useFetch<
+    CharactersApiResponse,
+    Character[],
+    Character[]
+  >(`https://api.makdulac.com/api/characters`, {
+    mapResult(result: CharactersApiResponse) {
+      return {
+        data: result.characters,
+      };
     },
-  );
+    keepPreviousData: true,
+    initialData: [],
+    onError(error) {
+      setErrorMessage(error.message);
+    },
+  });
 
   return (
     <CharacterBrowser
@@ -79,9 +89,13 @@ function CharacterBrowser({
   const [sortOrder, setSortOrder] = useState<SortOrder>(initialSortOrder);
 
   const scopedCharacters = discovererFilter
-    ? characters.filter((character) => character.discoverer === discovererFilter)
+    ? characters.filter(
+        (character) => character.discoverer === discovererFilter,
+      )
     : characters;
-  const sortedCharacters = [...scopedCharacters].sort((left, right) => compareCharacters(left, right, sortOrder));
+  const sortedCharacters = [...scopedCharacters].sort((left, right) =>
+    compareCharacters(left, right, sortOrder),
+  );
   const emptyTitle = errorMessage
     ? "Couldn't load icons"
     : discovererFilter
@@ -92,7 +106,9 @@ function CharacterBrowser({
     : discovererFilter
       ? "Try a different search term."
       : "Try again in a moment.";
-  const navigationTitle = discovererFilter ? `${discovererFilter}'s Icons` : "DuckDuckGo Character Icons";
+  const navigationTitle = discovererFilter
+    ? `${discovererFilter}'s Icons`
+    : "DuckDuckGo Character Icons";
   const searchBarPlaceholder = discovererFilter
     ? `Search icons discovered by ${discovererFilter}`
     : "Search character icons";
@@ -124,7 +140,11 @@ function CharacterBrowser({
               title={character.name}
               subtitle={`🧍 Discovered by ${character.discoverer}`}
               accessories={[{ text: character.discovered_date }]}
-              keywords={[character.discoverer, character.discovered_date, ...character.tags]}
+              keywords={[
+                character.discoverer,
+                character.discovered_date,
+                ...character.tags,
+              ]}
               actions={
                 <CharacterActions
                   character={character}
@@ -172,7 +192,11 @@ function CharacterBrowser({
             }}
             title={character.name}
             subtitle={`${character.discoverer} · ${character.discovered_date}`}
-            keywords={[character.discoverer, character.discovered_date, ...character.tags]}
+            keywords={[
+              character.discoverer,
+              character.discovered_date,
+              ...character.tags,
+            ]}
             actions={
               <CharacterActions
                 character={character}
@@ -208,7 +232,8 @@ function CharacterActions({
   onSortOrderChange,
 }: CharacterActionsProps) {
   const nextSortOrder = sortOrder === "asc" ? "desc" : "asc";
-  const isFilteredByCurrentDiscoverer = currentDiscovererFilter === character.discoverer;
+  const isFilteredByCurrentDiscoverer =
+    currentDiscovererFilter === character.discoverer;
 
   return (
     <ActionPanel>
@@ -236,7 +261,11 @@ function CharacterActions({
       </ActionPanel.Section>
       <ActionPanel.Section>
         <Action
-          title={nextSortOrder === "asc" ? "Sort Alphabetically" : "Reverse Alphabetical Sort"}
+          title={
+            nextSortOrder === "asc"
+              ? "Sort Alphabetically"
+              : "Reverse Alphabetical Sort"
+          }
           shortcut={{ modifiers: ["cmd", "shift"], key: "s" }}
           onAction={() => onSortOrderChange(nextSortOrder)}
         />
@@ -260,7 +289,10 @@ async function downloadCharacterImage(character: Character) {
 
     await mkdir(DOWNLOADS_DIRECTORY, { recursive: true });
 
-    const targetFilePath = await nextAvailablePath(DOWNLOADS_DIRECTORY, buildFileName(character.name, character.url));
+    const targetFilePath = await nextAvailablePath(
+      DOWNLOADS_DIRECTORY,
+      buildFileName(character.name, character.url),
+    );
 
     const imageBuffer = Buffer.from(await response.arrayBuffer());
     await writeFile(targetFilePath, imageBuffer);
@@ -277,13 +309,20 @@ async function downloadCharacterImage(character: Character) {
   }
 }
 
-function updateSortOrder(newValue: string, setSortOrder: (value: SortOrder) => void) {
+function updateSortOrder(
+  newValue: string,
+  setSortOrder: (value: SortOrder) => void,
+) {
   if (newValue === "asc" || newValue === "desc") {
     setSortOrder(newValue);
   }
 }
 
-function compareCharacters(left: Character, right: Character, sortOrder: SortOrder) {
+function compareCharacters(
+  left: Character,
+  right: Character,
+  sortOrder: SortOrder,
+) {
   if (sortOrder === "asc") {
     return left.name.localeCompare(right.name, undefined, {
       numeric: true,
@@ -301,7 +340,8 @@ function buildFileName(name: string, url: string) {
   try {
     const pathname = new URL(url).pathname;
     const extension = extname(pathname) || ".png";
-    const fileBaseName = basename(pathname, extension) || sanitizeFileName(name);
+    const fileBaseName =
+      basename(pathname, extension) || sanitizeFileName(name);
 
     return `${sanitizeFileName(fileBaseName)}${extension}`;
   } catch {

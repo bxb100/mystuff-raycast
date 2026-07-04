@@ -14,14 +14,12 @@
   },
   "dependencies": {
     "@raycast/api": "^1.104.13",
-    "@raycast/utils": "^2.2.4",
-    "form-data": "^4.0.5",
-    "get-db9": "^0.6.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "@raycast/utils": "^2.2.4"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
-    "@types/node": "22.13.10",
+    "@types/node": "^22.13.10",
     "@types/react": "19.0.10",
     "typescript": "^5.8.2",
     "vite-plus": "latest"
@@ -92,62 +90,6 @@
           "default": false
         }
       ]
-    },
-    {
-      "name": "scrcpy",
-      "icon": "scrcpy.png",
-      "title": "Scrcpy",
-      "subtitle": "Android",
-      "description": "Mirror android device screen with scrcpy",
-      "mode": "view",
-      "preferences": [
-        {
-          "description": "Set adb installation directory path. Default is '$HOME/Library/Android/sdk/platform-tools'.",
-          "name": "adbDir",
-          "placeholder": "ADB Installation Path",
-          "required": false,
-          "title": "adb command directory",
-          "type": "textfield"
-        },
-        {
-          "description": "Set scrcpy installation directory path. Default is '/usr/local/bin' for Intel and '/opt/homebrew/bin' for Apple Silicon.",
-          "name": "scrcpyDir",
-          "placeholder": "Scrcpy Installation Path",
-          "required": false,
-          "title": "scrcpy command directory",
-          "type": "textfield"
-        }
-      ]
-    },
-    {
-      "name": "search-github-stars",
-      "title": "Search GitHub Stars",
-      "icon": "github.png",
-      "description": "Semantic search over synced GitHub starred repositories in DB9",
-      "mode": "view"
-    },
-    {
-      "name": "sync-github-stars-to-db9",
-      "title": "Sync GitHub Stars to DB9",
-      "icon": "github_sync.png",
-      "description": "Manually sync GitHub starred repositories into DB9 for hybrid retrieval",
-      "mode": "view"
-    }
-  ],
-  "preferences": [
-    {
-      "name": "db9-client-token",
-      "type": "password",
-      "required": true,
-      "title": "DB9 Client Token",
-      "description": "DB9 bearer token. It is only sent to https://api.db9.ai."
-    },
-    {
-      "name": "github-token",
-      "type": "password",
-      "required": true,
-      "title": "GitHub Token",
-      "description": "GitHub token with permission to read starred repositories."
     }
   ],
   "platforms": [
