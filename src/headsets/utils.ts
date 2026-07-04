@@ -14,9 +14,13 @@ export function getBatteryIcon(device: Device): {
   tintColor: Color;
 } {
   const level = device.battery.level;
-  const tintColor = level > 20 ? Color.Green : level > 10 ? Color.Orange : Color.Red;
+  const tintColor =
+    level > 20 ? Color.Green : level > 10 ? Color.Orange : Color.Red;
 
-  const source = device.battery.status === "BATTERY_CHARGING" ? Icon.BatteryCharging : Icon.Battery;
+  const source =
+    device.battery.status === "BATTERY_CHARGING"
+      ? Icon.BatteryCharging
+      : Icon.Battery;
   return { source, tintColor };
 }
 
@@ -36,13 +40,24 @@ export function getBrandIcon(device: Device): ImageLike | undefined {
 }
 
 export function toggleLights(device: Device, status: 0 | 1) {
-  exec(`${brewPath} -d ${device.id_vendor}:${device.id_product} -l ${status}`, async (error, stdout, stderr) => {
-    if (error) {
-      await showToast(Style.Failure, "Failed to toggle lights", error.message);
-      return;
-    }
-    await showToast(Style.Success, `Lights ${status === 1 ? "enabled" : "disabled"}`, stdout || stderr);
-  });
+  exec(
+    `${brewPath} -d ${device.id_vendor}:${device.id_product} -l ${status}`,
+    async (error, stdout, stderr) => {
+      if (error) {
+        await showToast(
+          Style.Failure,
+          "Failed to toggle lights",
+          error.message,
+        );
+        return;
+      }
+      await showToast(
+        Style.Success,
+        `Lights ${status === 1 ? "enabled" : "disabled"}`,
+        stdout || stderr,
+      );
+    },
+  );
 }
 
 export function playNotification(device: Device) {
