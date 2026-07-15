@@ -29,7 +29,7 @@
     "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
   "icon": "extension-icon.png",
-  "packageManager": "npm@11.13.0",
+  "packageManager": "npm@11.18.0",
   "commands": [
     {
       "name": "dex",
